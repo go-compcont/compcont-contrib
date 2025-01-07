@@ -8,7 +8,7 @@ import (
 	"github.com/expr-lang/expr"
 	"github.com/expr-lang/expr/vm"
 	"github.com/go-compcont/compcont-core"
-	"github.com/go-compcont/compcont/compcont-std/compcont-zap"
+	compcontzap "github.com/go-compcont/compcont-std/compcont-zap"
 	"github.com/go-resty/resty/v2"
 	"go.uber.org/zap"
 )

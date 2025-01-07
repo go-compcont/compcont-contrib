@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-compcont/compcont-core"
-	"github.com/go-compcont/compcont/compcont-std/compcont-zap"
+	compcontzap "github.com/go-compcont/compcont-std/compcont-zap"
 	"go.uber.org/zap"
 )
 

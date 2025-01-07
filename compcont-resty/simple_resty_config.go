@@ -3,7 +3,7 @@ package restyprovider
 import (
 	"time"
 
-	"github.com/go-compcont/compcont/compcont-std/reloading"
+	"github.com/go-compcont/compcont-std/reloading"
 )
 
 func fillDefaultInPtr[T any](pptr **T, val T) {

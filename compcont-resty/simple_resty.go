@@ -6,7 +6,7 @@ import (
 	"sync"
 
 	"github.com/go-compcont/compcont-core"
-	"github.com/go-compcont/compcont/compcont-std/reloading"
+	"github.com/go-compcont/compcont-std/reloading"
 	"github.com/go-resty/resty/v2"
 )
 
