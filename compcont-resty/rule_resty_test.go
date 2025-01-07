@@ -14,7 +14,7 @@ import (
 func TestRuleProvider(t *testing.T) {
 	compcont.DefaultFactoryRegistry.Register(&compcont.TypedSimpleComponentFactory[string, RestyProvider]{
 		TypeID: "mock.resty",
-		CreateInstanceFunc: func(ctx compcont.Context, config string) (instance RestyProvider, err error) {
+		CreateInstanceFunc: func(ctx compcont.BuildContext, config string) (instance RestyProvider, err error) {
 			comp := GetRestyFunc(func(opts ...OptionsFunc) (*resty.Client, error) {
 				return resty.New().SetBaseURL(fmt.Sprint(config, time.Now().UnixMicro())), nil
 			})

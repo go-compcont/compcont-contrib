@@ -129,7 +129,7 @@ const TypeID compcont.ComponentTypeID = "contrib.gin-middleware-prometheus"
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, gin.HandlerFunc]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance gin.HandlerFunc, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance gin.HandlerFunc, err error) {
 		return New(ctx.Container, config)
 	},
 }

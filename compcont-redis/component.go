@@ -43,10 +43,10 @@ func New(cfg Config) (comp Component, err error) {
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, Component]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance Component, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance Component, err error) {
 		return New(config)
 	},
-	DestroyInstanceFunc: func(ctx compcont.Context, instance Component) (err error) {
+	DestroyInstanceFunc: func(ctx compcont.BuildContext, instance Component) (err error) {
 		return instance.Destroy()
 	},
 }

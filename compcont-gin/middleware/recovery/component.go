@@ -11,7 +11,7 @@ type Config struct{}
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, gin.HandlerFunc]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance gin.HandlerFunc, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance gin.HandlerFunc, err error) {
 		instance = gin.Recovery()
 		return
 	},

@@ -55,7 +55,7 @@ func New(cfg Config) (j JWTAuther, err error) {
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, JWTAuther]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance JWTAuther, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance JWTAuther, err error) {
 		return New(config)
 	},
 }

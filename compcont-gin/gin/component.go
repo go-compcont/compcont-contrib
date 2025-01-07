@@ -37,7 +37,7 @@ const TypeID compcont.ComponentTypeID = "contrib.gin"
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, Component]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance Component, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance Component, err error) {
 		return New(ctx.Container, config)
 	},
 }

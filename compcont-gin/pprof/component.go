@@ -28,7 +28,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (err error) {
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, any]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance any, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance any, err error) {
 		err = New(ctx.Container, config)
 		return
 	},

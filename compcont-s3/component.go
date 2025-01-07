@@ -70,7 +70,7 @@ const TypeID compcont.ComponentTypeID = "contrib.s3"
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, *s3.Client]{
 	TypeID: TypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config Config) (instance *s3.Client, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance *s3.Client, err error) {
 		return Build(ctx.Container, config)
 	},
 }

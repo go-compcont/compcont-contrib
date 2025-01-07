@@ -6,7 +6,7 @@ const SimpleTypeID compcont.ComponentTypeID = "contrib.resty-provider-simple"
 
 var simpleFactory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[SimpleProviderConfig, RestyProvider]{
 	TypeID: SimpleTypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config SimpleProviderConfig) (instance RestyProvider, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config SimpleProviderConfig) (instance RestyProvider, err error) {
 		err = config.checkAndFillDefault()
 		if err != nil {
 			return
@@ -19,7 +19,7 @@ const RuleTypeID compcont.ComponentTypeID = "contrib.resty-provider-rule"
 
 var ruleFactory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[RuleProviderConfig, RestyProvider]{
 	TypeID: RuleTypeID,
-	CreateInstanceFunc: func(ctx compcont.Context, config RuleProviderConfig) (instance RestyProvider, err error) {
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config RuleProviderConfig) (instance RestyProvider, err error) {
 		return newRuleProviderImpl(ctx.Container, config)
 	},
 }
