@@ -68,7 +68,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 
 		// app日志添加一个RequestID即可
 		applicationLogger := applicationLogger.With(zap.String("request_id", reqid))
-		compcontzap.WithLogger(ctx.Request, applicationLogger)
+		compcontzap.WithRequest(ctx.Request, applicationLogger)
 
 		// 请求日志后续处理
 		requestLogger := requestLogger.With(zap.String("request_id", reqid))
