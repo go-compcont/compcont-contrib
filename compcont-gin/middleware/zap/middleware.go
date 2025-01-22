@@ -116,7 +116,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 	return
 }
 
-const TypeID compcont.ComponentTypeID = "base.gin-middleware-zap"
+const TypeID compcont.ComponentTypeID = "contrib.gin-middleware-zap"
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, gin.HandlerFunc]{
 	TypeID: TypeID,
