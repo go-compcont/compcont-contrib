@@ -68,18 +68,21 @@ func (c *simpleProviderImpl) getRestyNoOnce() (cli *resty.Client, err error) {
 		SetRetryCount(*c.Retry.MaxCount).
 		OnBeforeRequest(func(cli *resty.Client, r *resty.Request) error {
 			logger := compcontzap.FromContext(r.Context())
+
+			var userAgentList []string = c.UserAgent.UserAgentList
 			if c.userAgentProvider != nil {
-				userAgentList, err := c.userAgentProvider.LoadConfig(r.Context())
+				userAgentList, err = c.userAgentProvider.LoadConfig(r.Context())
 				if err != nil {
 					logger.Error("load user-agent config error", zap.Error(err))
 					return err
 				}
-				if len(userAgentList) > 0 {
-					userAgent := userAgentList[rand.N(len(userAgentList))]
-					r.Header.Set("User-Agent", userAgent)
-					logger.Info("request with User-Agent", zap.String("userAgent", userAgent))
-				}
 			}
+			if len(userAgentList) > 0 {
+				userAgent := userAgentList[rand.N(len(userAgentList))]
+				r.Header.Set("User-Agent", userAgent)
+				logger.Info("request with User-Agent", zap.String("userAgent", userAgent))
+			}
+
 			logger.Debug(
 				"resty request",
 				zap.Int("attempt", r.Attempt),

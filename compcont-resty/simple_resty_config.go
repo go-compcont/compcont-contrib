@@ -50,6 +50,7 @@ type TLSConfig struct {
 }
 
 type UserAgentConfig struct {
+	UserAgentList         []string                                   `ccf:"user_agent_list"`
 	UserAgentListProvider *reloading.ReloadingConfigConfig[[]string] `ccf:"user_agent_list_provider"`
 }
 
