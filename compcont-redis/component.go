@@ -1,6 +1,8 @@
 package compcontredis
 
 import (
+	"io"
+
 	"github.com/go-compcont/compcont-core"
 	"github.com/redis/go-redis/v9"
 )
@@ -12,20 +14,8 @@ type Config struct {
 }
 
 type Component interface {
-	GetClient() *redis.Client
-	Destroy() error
-}
-
-type componentFunc struct {
-	GetClientFunc func() *redis.Client
-	DestroyFunc   func() error
-}
-
-func (f componentFunc) GetClient() *redis.Client {
-	return f.GetClientFunc()
-}
-func (f componentFunc) Destroy() error {
-	return f.DestroyFunc()
+	redis.Cmdable
+	io.Closer
 }
 
 func New(cfg Config) (comp Component, err error) {
@@ -33,11 +23,7 @@ func New(cfg Config) (comp Component, err error) {
 	if err != nil {
 		return
 	}
-	rdb := redis.NewClient(options)
-	comp = &componentFunc{
-		GetClientFunc: func() *redis.Client { return rdb },
-		DestroyFunc:   rdb.Close,
-	}
+	comp = redis.NewClient(options)
 	return
 }
 
@@ -47,7 +33,7 @@ var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[C
 		return New(config)
 	},
 	DestroyInstanceFunc: func(ctx compcont.BuildContext, instance Component) (err error) {
-		return instance.Destroy()
+		return instance.Close()
 	},
 }
 
