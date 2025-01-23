@@ -8,7 +8,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const TypeID = "contrib.gin-prometheus"
+const TypeID = "contrib.gin.prometheus"
 
 type Config struct {
 	Gin compcont.TypedComponentConfig[any, gin.IRouter] `ccf:"gin"`

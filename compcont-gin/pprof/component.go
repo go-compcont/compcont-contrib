@@ -11,7 +11,7 @@ type Config struct {
 	RoutePrefix string                                          `ccf:"route_prefix"`
 }
 
-const TypeID compcont.ComponentTypeID = "contrib.gin-pprof"
+const TypeID compcont.ComponentTypeID = "contrib.gin.pprof"
 
 func New(cc compcont.IComponentContainer, cfg Config) (err error) {
 	g, err := cfg.Gin.LoadComponent(cc)

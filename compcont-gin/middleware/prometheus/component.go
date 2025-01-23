@@ -125,7 +125,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 	return
 }
 
-const TypeID compcont.ComponentTypeID = "contrib.gin-middleware-prometheus"
+const TypeID compcont.ComponentTypeID = "contrib.gin.middleware.prometheus"
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, gin.HandlerFunc]{
 	TypeID: TypeID,

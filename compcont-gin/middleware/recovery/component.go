@@ -5,7 +5,7 @@ import (
 	"github.com/go-compcont/compcont-core"
 )
 
-const TypeID compcont.ComponentTypeID = "contrib.gin-middleware-recovery"
+const TypeID compcont.ComponentTypeID = "contrib.gin.middleware.recovery"
 
 type Config struct{}
 

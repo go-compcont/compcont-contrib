@@ -8,6 +8,7 @@ import (
 	_ "github.com/go-compcont/compcont-contrib/compcont-gin/middleware/zap"
 	_ "github.com/go-compcont/compcont-contrib/compcont-gin/pprof"
 	_ "github.com/go-compcont/compcont-contrib/compcont-gin/prometheus"
+	_ "github.com/go-compcont/compcont-contrib/compcont-gorm"
 	_ "github.com/go-compcont/compcont-contrib/compcont-jwt"
 	_ "github.com/go-compcont/compcont-contrib/compcont-ratelimiter"
 	_ "github.com/go-compcont/compcont-contrib/compcont-redis"
