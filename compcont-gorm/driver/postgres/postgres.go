@@ -6,7 +6,7 @@ import (
 	"gorm.io/gorm"
 )
 
-const Type compcont.ComponentTypeID = "contrib.gorm.driver.postgres"
+const TypeID compcont.ComponentTypeID = "contrib.gorm.driver.postgres"
 
 type Config struct {
 	DSN                  string `ccf:"dsn"`
@@ -15,7 +15,7 @@ type Config struct {
 	WithoutReturning     bool   `ccf:"without_returning"`
 }
 
-func Build(cc compcont.IComponentContainer, cfg Config) (c gorm.Dialector, err error) {
+func New(cc compcont.IComponentContainer, cfg Config) (c gorm.Dialector, err error) {
 	c = postgres.New(postgres.Config{
 		DSN:                  cfg.DSN,
 		WithoutQuotingCheck:  cfg.WithoutQuotingCheck,
@@ -23,4 +23,19 @@ func Build(cc compcont.IComponentContainer, cfg Config) (c gorm.Dialector, err e
 		WithoutReturning:     cfg.WithoutReturning,
 	})
 	return
+}
+
+var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, any]{
+	TypeID: TypeID,
+	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance any, err error) {
+		return New(ctx.Container, config)
+	},
+}
+
+func MustRegister(registry compcont.IFactoryRegistry) {
+	compcont.MustRegister(registry, factory)
+}
+
+func init() {
+	MustRegister(compcont.DefaultFactoryRegistry)
 }
