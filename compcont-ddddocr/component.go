@@ -15,7 +15,7 @@ type Config struct {
 	BaseURL string `ccf:"base_url"`
 }
 
-func buildComponent(cc compcont.IComponentContainer, cfg Config) (c OCR, err error) {
+func buildComponent(cfg Config) (c OCR, err error) {
 	if cfg.BaseURL == "" {
 		err = errors.New("url is required")
 		return
@@ -39,7 +39,7 @@ func buildComponent(cc compcont.IComponentContainer, cfg Config) (c OCR, err err
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, any]{
 	TypeID: TypeID,
 	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance any, err error) {
-		return buildComponent(ctx.Container, config)
+		return buildComponent(config)
 	},
 }
 

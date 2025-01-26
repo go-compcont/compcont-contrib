@@ -2,6 +2,7 @@ package compcontcontrib
 
 import (
 	_ "github.com/go-compcont/compcont-contrib/compcont-cron"
+	_ "github.com/go-compcont/compcont-contrib/compcont-ddddocr"
 	_ "github.com/go-compcont/compcont-contrib/compcont-gin/gin"
 	_ "github.com/go-compcont/compcont-contrib/compcont-gin/middleware/prometheus"
 	_ "github.com/go-compcont/compcont-contrib/compcont-gin/middleware/recovery"

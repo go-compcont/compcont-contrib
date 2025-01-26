@@ -19,8 +19,8 @@ type Config struct {
 		RecordBodyLimit    int `ccf:"record_body_limit"`
 		AddRequestIDHeader struct {
 			Enabled bool   `ccf:"enabled"`
-			Name    string `ccf:"add_request_id_header"`
-		}
+			Name    string `ccf:"name"`
+		} `ccf:"add_request_id_header"`
 	}
 }
 
@@ -60,7 +60,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 
 		if cfg.Response.AddRequestIDHeader.Enabled {
 			headerName := cfg.Response.AddRequestIDHeader.Name
-			if headerName != "" {
+			if headerName == "" {
 				headerName = "X-Request-ID"
 			}
 			ctx.Writer.Header().Add(headerName, reqid)
