@@ -22,9 +22,9 @@ type rateLimiterImpl struct {
 
 // newImpl 初始化一个新的速率限制器
 func newImpl(cfg Config) (RateLimiter, error) {
-	// 如果未配置 LRUSize，则使用默认值 1000
+	// 如果未配置 LRUSize，则使用默认值 1024
 	if cfg.LRUSize <= 0 {
-		cfg.LRUSize = 1000
+		cfg.LRUSize = 1024
 	}
 
 	// 创建一个指定大小的 LRU 缓存
