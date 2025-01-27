@@ -7,7 +7,7 @@ const TypeID compcont.ComponentTypeID = "contrib.ratelimiter"
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, RateLimiter]{
 	TypeID: TypeID,
 	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance RateLimiter, err error) {
-		instance = newImpl(config)
+		instance, err = newImpl(config)
 		return
 	},
 }
