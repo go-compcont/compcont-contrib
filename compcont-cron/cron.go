@@ -15,8 +15,13 @@ func New(cfg Config) *componentImpl {
 	return &componentImpl{cron: c, policy: cfg.Policy}
 }
 
-func (c *componentImpl) AddTask(taskName string, fn func()) {
+func (c *componentImpl) AddTask(taskName string, crontab string, fn func()) {
+	if crontab != "" {
+		c.cron.AddFunc(crontab, fn)
+		return
+	}
 	if taskPolicy, ok := c.policy[taskName]; ok {
 		c.cron.AddFunc(taskPolicy, fn)
+		return
 	}
 }

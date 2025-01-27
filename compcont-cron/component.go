@@ -7,7 +7,7 @@ import (
 const TypeID compcont.ComponentTypeID = "contrib.simple-cron-scheduler"
 
 type Component interface {
-	AddTask(taskName string, fn func())
+	AddTask(taskName string, crontab string, fn func())
 }
 
 type Config struct {

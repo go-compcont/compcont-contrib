@@ -32,7 +32,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 	if cfg.ApplicationLogger != nil {
 		applicationLoggerComp, err1 := cfg.ApplicationLogger.LoadComponent(cc)
 		if err1 != nil {
-			err1 = err
+			err = err1
 			return
 		}
 		applicationLogger = applicationLoggerComp.Instance
@@ -41,7 +41,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 	if cfg.RequestLogger != nil {
 		requestLoggerComp, err1 := cfg.RequestLogger.LoadComponent(cc)
 		if err1 != nil {
-			err1 = err
+			err = err1
 			return
 		}
 		requestLogger = requestLoggerComp.Instance

@@ -53,7 +53,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 	}
 
 	var (
-		labels = []string{"status", "endpoint", "method"}
+		labels = []string{"status", "endpoint", "method", "api_name"}
 
 		uptime = prometheus.NewCounterVec(
 			prometheus.CounterOpts{
@@ -109,8 +109,12 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 		status := fmt.Sprintf("%d", c.Writer.Status())
 		endpoint := c.FullPath()
 		method := c.Request.Method
+		apiName, ok := apiNameFromContext(c)
+		if !ok {
+			apiName = "UnknownAPI"
+		}
 
-		lvs := []string{status, endpoint, method}
+		lvs := []string{status, endpoint, method, apiName}
 
 		// no response content will return -1
 		respSize := c.Writer.Size()
