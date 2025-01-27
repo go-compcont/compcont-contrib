@@ -1,6 +1,7 @@
 package compcontredis
 
 import (
+	"context"
 	"io"
 
 	"github.com/go-compcont/compcont-core"
@@ -24,6 +25,10 @@ func New(cfg Config) (comp Component, err error) {
 		return
 	}
 	comp = redis.NewClient(options)
+	status := comp.Ping(context.Background())
+	if err = status.Err(); err != nil {
+		return
+	}
 	return
 }
 
