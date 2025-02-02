@@ -30,14 +30,18 @@ func absolutePath(path []compcont.ComponentName, sep string) string {
 	return strings.Join(ss, sep)
 }
 
-func iter(
-	w io.Writer,
-	instance any, name compcont.ComponentName,
-	parentPath []compcont.ComponentName, deps []compcont.ComponentName,
-	deep int, indent string) error {
+func iter(w io.Writer, ctx compcont.BuildContext, deep int, indent string) error {
 	prefix := strings.Repeat(indent, deep)
-	currentPath := append(parentPath, name)
-	if container, ok := instance.(compcont.IComponentContainer); !ok {
+
+	currentPath := ctx.GetAbsolutePath()
+	if ctx.Mount == nil {
+		// 根节点
+		return nil
+	}
+	parentPath := ctx.Container.GetContext().GetAbsolutePath()
+	name := ctx.Config.Name
+	deps := ctx.Config.Deps
+	if container, ok := ctx.Mount.Instance.(compcont.IComponentContainer); !ok {
 		fmt.Fprintf(w, prefix+"component [%s] as %s\n", name, absolutePath(currentPath, "_"))
 	} else {
 		fmt.Fprintf(w, prefix+`package %s as %s {`+"\n", strconv.Quote(name.String()), absolutePath(currentPath, "_"))
@@ -47,7 +51,7 @@ func iter(
 			if err != nil {
 				return err
 			}
-			err = iter(w, comp.Instance, comp.BuildContext.Config.Name, currentPath, comp.BuildContext.Config.Deps, deep+1, indent)
+			err = iter(w, comp.BuildContext, deep+1, indent)
 			if err != nil {
 				return err
 			}
@@ -65,7 +69,7 @@ var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[C
 	CreateInstanceFunc: func(ctx compcont.BuildContext, config Config) (instance Component, err error) {
 		buf := &bytes.Buffer{}
 		fmt.Fprintln(buf, "@startuml")
-		iter(buf, ctx.FindRoot().Mount.Instance, compcont.ComponentName("ROOT"), nil, nil, 0, "    ")
+		iter(buf, ctx.FindRoot(), 0, "    ")
 		fmt.Fprintln(buf, "@enduml")
 
 		if config.PUMLFile != "" {
