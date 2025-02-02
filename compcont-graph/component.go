@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/go-compcont/compcont-core"
+	compcontzap "github.com/go-compcont/compcont-std/compcont-zap"
+	"go.uber.org/zap"
 )
 
 type Config struct {
@@ -69,11 +71,18 @@ var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[C
 		if config.PUMLFile != "" {
 			err = os.WriteFile(config.PUMLFile, buf.Bytes(), 0644)
 			if err != nil {
+				compcontzap.GetDefault().Info("写入PUML文件失败", zap.Error(err))
 				return
 			}
+			compcontzap.GetDefault().Info("写入PUML文件成功", zap.String("puml_file", config.PUMLFile))
 		}
 		if config.PNGFile != "" {
-			renderToPNG(buf.String(), config.PNGFile)
+			err = renderToPNG(buf.String(), config.PNGFile)
+			if err != nil {
+				compcontzap.GetDefault().Info("写入PNG文件失败", zap.Error(err))
+				return
+			}
+			compcontzap.GetDefault().Info("写入PNG文件成功", zap.String("png_file", config.PNGFile))
 		}
 
 		return
