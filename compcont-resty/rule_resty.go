@@ -47,12 +47,12 @@ func NewRule(cc compcont.IComponentContainer, cfg RuleConfig) (rule Rule, err er
 	return
 }
 
-func (r *Rule) Match(opt options) (ok bool, err error) {
+func (r *Rule) Match(opt Options) (ok bool, err error) {
 	var env env
-	if opt.url != nil {
-		env.Host = opt.url.Host
-		env.Path = opt.url.Path
-		env.Tags = opt.tags
+	if opt.Url != nil {
+		env.Host = opt.Url.Host
+		env.Path = opt.Url.Path
+		env.Tags = opt.Tags
 	}
 	ret, err := expr.Run(r.ruleExpr, env)
 	if err != nil {
@@ -98,16 +98,16 @@ func newRuleProviderImpl(cc compcont.IComponentContainer, cfg RuleProviderConfig
 }
 
 func (c *ruleProviderImpl) GetResty(opts ...OptionsFunc) (cli *resty.Client, err error) {
-	var opt options
+	var opt Options
 	for _, fn := range opts {
 		fn(&opt)
 	}
 
-	if opt.ctx == nil {
-		opt.ctx = context.Background()
+	if opt.Ctx == nil {
+		opt.Ctx = context.Background()
 	}
 
-	logger := compcontzap.FromContext(opt.ctx)
+	logger := compcontzap.FromContext(opt.Ctx)
 	for _, rule := range c.rules {
 		ok, err := rule.Match(opt)
 		if err != nil {

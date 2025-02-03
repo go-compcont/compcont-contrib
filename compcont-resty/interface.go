@@ -7,17 +7,17 @@ import (
 	"github.com/go-resty/resty/v2"
 )
 
-type options struct {
-	ctx  context.Context
-	tags []string
-	url  *url.URL
+type Options struct {
+	Ctx  context.Context
+	Tags []string
+	Url  *url.URL
 }
 
-type OptionsFunc func(o *options)
+type OptionsFunc func(o *Options)
 
 func WithContext(ctx context.Context) OptionsFunc {
-	return func(o *options) {
-		o.ctx = ctx
+	return func(o *Options) {
+		o.Ctx = ctx
 	}
 }
 
@@ -26,14 +26,14 @@ func WithURLOption(rawURL string) OptionsFunc {
 	if err != nil {
 		panic(err)
 	}
-	return func(o *options) {
-		o.url = u
+	return func(o *Options) {
+		o.Url = u
 	}
 }
 
 func WithTagOption(tag string) OptionsFunc {
-	return func(o *options) {
-		o.tags = append(o.tags, tag)
+	return func(o *Options) {
+		o.Tags = append(o.Tags, tag)
 	}
 }
 

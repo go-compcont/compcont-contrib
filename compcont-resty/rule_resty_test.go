@@ -41,15 +41,15 @@ func TestRuleProvider(t *testing.T) {
 		},
 	})
 	assert.NoError(t, err)
-	cli, err := p.GetResty(func(o *options) {
-		o.url, err = url.Parse("http://127.0.0.1/test")
+	cli, err := p.GetResty(func(o *Options) {
+		o.Url, err = url.Parse("http://127.0.0.1/test")
 		assert.NoError(t, err)
 	})
 	assert.NoError(t, err)
 	assert.Contains(t, cli.BaseURL, "test-1")
 
-	cli, err = p.GetResty(func(o *options) {
-		o.url, err = url.Parse("http://127.0.0.1/test1")
+	cli, err = p.GetResty(func(o *Options) {
+		o.Url, err = url.Parse("http://127.0.0.1/test1")
 		assert.NoError(t, err)
 	})
 	assert.NoError(t, err)
