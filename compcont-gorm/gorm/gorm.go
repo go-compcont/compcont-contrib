@@ -12,10 +12,7 @@ type Config struct {
 }
 
 func New(cc compcont.IComponentContainer, cfg Config) (c *gorm.DB, err error) {
-	driverComp, err := cfg.Driver.LoadComponent(cc)
-	if err != nil {
-		return
-	}
+	driverComp := cfg.Driver.MustLoadComponent(cc)
 	db, err := gorm.Open(driverComp.Instance, &gorm.Config{})
 	if err != nil {
 		return

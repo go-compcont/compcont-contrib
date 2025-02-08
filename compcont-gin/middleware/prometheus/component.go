@@ -42,10 +42,8 @@ type Config struct {
 }
 
 func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err error) {
-	regComp, err := cfg.Registry.LoadComponent(cc)
-	if err != nil {
-		return
-	}
+	regComp := cfg.Registry.MustLoadComponent(cc)
+
 	namespace := cfg.Namespace
 	if namespace == "" {
 		err = errors.New("namespace must be set")

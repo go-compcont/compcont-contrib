@@ -35,10 +35,7 @@ func NewRule(cc compcont.IComponentContainer, cfg RuleConfig) (rule Rule, err er
 	if err != nil {
 		return
 	}
-	restyProviderComp, err := cfg.RestyProvider.LoadComponent(cc)
-	if err != nil {
-		return
-	}
+	restyProviderComp := cfg.RestyProvider.MustLoadComponent(cc)
 	rule = Rule{
 		RestyProvider: restyProviderComp.Instance,
 		ruleExpr:      ruleExpr,
@@ -77,10 +74,7 @@ type ruleProviderImpl struct {
 }
 
 func newRuleProviderImpl(cc compcont.IComponentContainer, cfg RuleProviderConfig) (c RestyProvider, err error) {
-	defaultProviderComp, err := cfg.DefaultProvider.LoadComponent(cc)
-	if err != nil {
-		return
-	}
+	defaultProviderComp := cfg.DefaultProvider.MustLoadComponent(cc)
 
 	var rules []Rule
 	for _, ruleCfg := range cfg.Rules {

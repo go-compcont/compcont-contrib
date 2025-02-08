@@ -30,20 +30,12 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 		applicationLogger *zap.Logger = zap.NewNop()
 	)
 	if cfg.ApplicationLogger != nil {
-		applicationLoggerComp, err1 := cfg.ApplicationLogger.LoadComponent(cc)
-		if err1 != nil {
-			err = err1
-			return
-		}
+		applicationLoggerComp := cfg.ApplicationLogger.MustLoadComponent(cc)
 		applicationLogger = applicationLoggerComp.Instance
 	}
 
 	if cfg.RequestLogger != nil {
-		requestLoggerComp, err1 := cfg.RequestLogger.LoadComponent(cc)
-		if err1 != nil {
-			err = err1
-			return
-		}
+		requestLoggerComp := cfg.RequestLogger.MustLoadComponent(cc)
 		requestLogger = requestLoggerComp.Instance
 	}
 

@@ -14,10 +14,7 @@ type Config struct {
 const TypeID compcont.ComponentTypeID = "contrib.gin.pprof"
 
 func New(cc compcont.IComponentContainer, cfg Config) (err error) {
-	g, err := cfg.Gin.LoadComponent(cc)
-	if err != nil {
-		return
-	}
+	g := cfg.Gin.MustLoadComponent(cc)
 	var options []string
 	if len(cfg.RoutePrefix) > 0 {
 		options = append(options, cfg.RoutePrefix)

@@ -20,12 +20,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c Component, err error) {
 	g := gin.New(func(e *gin.Engine) { e.ContextWithFallback = true })
 	var middlewares []gin.HandlerFunc
 	for _, middlewareCfg := range cfg.Middlewares {
-		if component, err1 := middlewareCfg.LoadComponent(cc); err1 != nil {
-			err = err1
-			return
-		} else {
-			middlewares = append(middlewares, component.Instance)
-		}
+		middlewares = append(middlewares, middlewareCfg.MustLoadComponent(cc).Instance)
 	}
 	g.Use(middlewares...)
 	go g.Run(cfg.ListenAddrs...)

@@ -15,10 +15,7 @@ type Config struct {
 }
 
 func New(cc compcont.IComponentContainer, cfg Config) (reg *prometheus.Registry, err error) {
-	routerComp, err := cfg.Gin.LoadComponent(cc)
-	if err != nil {
-		return
-	}
+	routerComp := cfg.Gin.MustLoadComponent(cc)
 	router := routerComp.Instance
 
 	reg = prometheus.NewRegistry()
