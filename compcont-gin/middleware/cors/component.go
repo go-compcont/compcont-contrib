@@ -8,7 +8,7 @@ import (
 	"github.com/go-compcont/compcont-core"
 )
 
-const TypeID compcont.ComponentTypeID = "contrib.gin.middleware.recovery"
+const TypeID compcont.ComponentTypeID = "contrib.gin.middleware.cors"
 
 type Config struct {
 	AllowAllOrigins           bool          `ccf:"allow_all_origins"`
