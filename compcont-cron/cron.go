@@ -4,7 +4,7 @@ import "github.com/robfig/cron/v3"
 
 type componentImpl struct {
 	cron   *cron.Cron
-	policy map[string]string
+	policy map[string][]string
 }
 
 func New(cfg Config) *componentImpl {
@@ -17,7 +17,9 @@ func New(cfg Config) *componentImpl {
 
 func (c *componentImpl) AddTask(taskName string, fn func()) {
 	if taskPolicy, ok := c.policy[taskName]; ok {
-		c.cron.AddFunc(taskPolicy, fn)
+		for _, policy := range taskPolicy {
+			c.cron.AddFunc(policy, fn)
+		}
 		return
 	}
 }

@@ -11,8 +11,8 @@ type Component interface {
 }
 
 type Config struct {
-	Enabled bool              `ccf:"enabled"` // 是否启用调度
-	Policy  map[string]string `ccf:"policy"`  // 各个定时任务调度策略map[taskName]crontab
+	Enabled bool                `ccf:"enabled"` // 是否启用调度
+	Policy  map[string][]string `ccf:"policy"`  // 各个定时任务调度策略map[taskName]crontab
 }
 
 var factory compcont.IComponentFactory = &compcont.TypedSimpleComponentFactory[Config, Component]{
