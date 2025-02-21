@@ -112,6 +112,9 @@ func (c *simpleProviderImpl) getRestyNoOnce() (cli *resty.Client, err error) {
 	}
 	for _, retryCondition := range c.SimpleProviderConfig.Retry.Condition {
 		cli.AddRetryCondition(func(r *resty.Response, err error) bool {
+			if err != nil {
+				return true
+			}
 			logger := compcontzap.FromContext(r.Request.Context())
 			if err != nil {
 				logger.Error("retry error", zap.Error(err))
