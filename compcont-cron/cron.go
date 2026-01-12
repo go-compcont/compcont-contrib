@@ -3,7 +3,6 @@ package compcontcron
 import (
 	"context"
 	"errors"
-	"fmt"
 	"time"
 
 	compcontzap "github.com/go-compcont/compcont-std/compcont-zap"
@@ -32,7 +31,6 @@ func New(logger *zap.Logger, cfg Config) *componentImpl {
 }
 
 func (c *componentImpl) DoTask(ctx context.Context, taskName string) (err error) {
-	fmt.Println(c.fnMap)
 	if fn, ok := c.fnMap[taskName]; !ok {
 		return errors.New("task not found: " + taskName)
 	} else {
