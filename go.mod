@@ -12,8 +12,8 @@ require (
 	github.com/gin-contrib/cors v1.7.3
 	github.com/gin-contrib/pprof v1.5.0
 	github.com/gin-gonic/gin v1.10.0
-	github.com/go-compcont/compcont-core v0.0.1
-	github.com/go-compcont/compcont-std v0.0.2
+	github.com/go-compcont/compcont-core v0.1.0
+	github.com/go-compcont/compcont-std v0.0.3-0.20250215034448-9f9a5ed52a9b
 	github.com/go-resty/resty/v2 v2.16.2
 	github.com/google/uuid v1.6.0
 	github.com/hashicorp/golang-lru v1.0.2
@@ -78,7 +78,6 @@ require (
 	github.com/prometheus/client_model v0.6.1 // indirect
 	github.com/prometheus/common v0.55.0 // indirect
 	github.com/prometheus/procfs v0.15.1 // indirect
-	github.com/rogpeppe/go-internal v1.13.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect
 	github.com/ugorji/go/codec v1.2.12 // indirect
 	go.uber.org/multierr v1.11.0 // indirect

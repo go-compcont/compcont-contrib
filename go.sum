@@ -69,10 +69,10 @@ github.com/gin-contrib/sse v1.0.0 h1:y3bT1mUWUxDpW4JLQg/HnTqV4rozuW4tC9eFKTxYI9E
 github.com/gin-contrib/sse v1.0.0/go.mod h1:zNuFdwarAygJBht0NTKiSi3jRf6RbqeILZ9Sp6Slhe0=
 github.com/gin-gonic/gin v1.10.0 h1:nTuyha1TYqgedzytsKYqna+DfLos46nTv2ygFy86HFU=
 github.com/gin-gonic/gin v1.10.0/go.mod h1:4PMNQiOhvDRa013RKVbsiNwoyezlm2rm0uX/T7kzp5Y=
-github.com/go-compcont/compcont-core v0.0.1 h1:3JsxvtJA6fTKRClD1hUkgbWrge0NorKFkQE6jJ7E7IA=
-github.com/go-compcont/compcont-core v0.0.1/go.mod h1:wpg7iVOi4HHo8f/vK3pdfj5HuO4svfQWsNViUKG/t6U=
-github.com/go-compcont/compcont-std v0.0.2 h1:vPUG8ejUjhpYztdicFfEn6L3zPdiQsx8PsdT0g4wdbw=
-github.com/go-compcont/compcont-std v0.0.2/go.mod h1:mOwMNjdkP4feMJOeCDc8BZOgMEe4Oq3w8iQ8Uw47mmY=
+github.com/go-compcont/compcont-core v0.1.0 h1:4f3mAVlHcgcep4STaTmhmznohSYobTL7MYWhtg2d080=
+github.com/go-compcont/compcont-core v0.1.0/go.mod h1:DpFWQyVMBaWwvAM+x9U91ZiT0pzj/2y3P3qMc4intcs=
+github.com/go-compcont/compcont-std v0.0.3-0.20250215034448-9f9a5ed52a9b h1:CnItxXb/s4kgV/GruayhM8ItXawOcWK2MJejFh81JSE=
+github.com/go-compcont/compcont-std v0.0.3-0.20250215034448-9f9a5ed52a9b/go.mod h1:IOuea3fmKaPX5wdj3RxTB6xCUU6J7sDOxsYrsF/QllM=
 github.com/go-playground/assert/v2 v2.2.0 h1:JvknZsQTYeFEAhQwI4qEt9cyV5ONwRHC+lYKSsYSR8s=
 github.com/go-playground/assert/v2 v2.2.0/go.mod h1:VDjEfimB/XKnb+ZQfWdccd7VUvScMdVu0Titje2rxJ4=
 github.com/go-playground/locales v0.14.1 h1:EWaQ/wswjilfKLTECiXz7Rh+3BjFhfDFKv/oXslEjJA=
