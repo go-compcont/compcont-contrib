@@ -3,7 +3,6 @@ package restyprovider
 import (
 	"crypto/tls"
 	"math/rand/v2"
-	"sync"
 
 	"github.com/go-compcont/compcont-core"
 	compcontzap "github.com/go-compcont/compcont-std/compcont-zap"
@@ -30,18 +29,10 @@ func statusCodeHitTest(statusCodeCfg []int, code int) bool {
 type simpleProviderImpl struct {
 	SimpleProviderConfig
 	userAgentProvider reloading.IReloadingConfig[[]string]
-	onceClient        *resty.Client
-	once              sync.Once
 }
 
 func (c *simpleProviderImpl) GetResty(opts ...OptionsFunc) (cli *resty.Client, err error) {
-	if !c.SimpleProviderConfig.Once {
-		return c.getRestyNoOnce()
-	}
-	c.once.Do(func() {
-		c.onceClient, err = c.getRestyNoOnce()
-	})
-	return c.onceClient, err
+	return c.getRestyNoOnce()
 }
 
 func newSimpleProviderImpl(cc compcont.IComponentContainer, cfg SimpleProviderConfig) (comp *simpleProviderImpl, err error) {

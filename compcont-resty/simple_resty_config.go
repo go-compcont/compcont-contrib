@@ -60,7 +60,6 @@ type ProxyConfig struct {
 }
 
 type SimpleProviderConfig struct {
-	Once      bool            `ccf:"once"` // 是否单例
 	Debug     DebugConfig     `ccf:"debug"`
 	Timeout   time.Duration   `ccf:"timeout"`
 	Proxy     ProxyConfig     `ccf:"proxy"`
