@@ -1,6 +1,7 @@
 package ddddocr
 
 import (
+	"context"
 	"encoding/json"
 	"errors"
 	"io"
@@ -9,7 +10,7 @@ import (
 )
 
 type OCR interface {
-	OCR(io.Reader) (s string, err error)
+	OCR(context.Context, io.Reader) (s string, err error)
 }
 
 type DdddOCR struct {
@@ -30,7 +31,7 @@ func New(url string, client *resty.Client) OCR {
 	}
 }
 
-func (d *DdddOCR) OCR(r io.Reader) (s string, err error) {
+func (d *DdddOCR) OCR(ctx context.Context, r io.Reader) (s string, err error) {
 	resp, err := d.client.R().
 		SetFileReader("file", "image.png", r).
 		Post(d.url + "/ocr")
