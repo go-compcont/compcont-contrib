@@ -66,11 +66,11 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 		requestLogger := requestLogger.With(zap.String("request_id", reqid))
 
 		// 记录请求体的前 n 个字节
-		var logedRequestBody string
+		var logedRequestBody any
 		if ctx.Request.Body != nil {
 			reqRecorder := newReadCloserRecorder(ctx.Request.Body, cfg.Request.RecordBodyLimit)
 			ctx.Request.Body = reqRecorder
-			logedRequestBody = bytes2String(reqRecorder.LimitedBody())
+			logedRequestBody = reqRecorder.LimitedBodyAsJSON()
 		}
 
 		respRecorder := newWriteCloserRecorder(ctx.Writer, cfg.Response.RecordBodyLimit)
@@ -101,7 +101,7 @@ func New(cc compcont.IComponentContainer, cfg Config) (c gin.HandlerFunc, err er
 				"status": ctx.Writer.Status(),
 				"size":   ctx.Writer.Size(),
 				"header": ctx.Writer.Header(),
-				"body":   bytes2String(respRecorder.LimitedBody()),
+				"body":   respRecorder.LimitedBodyAsJSON(),
 			}),
 		)
 	})

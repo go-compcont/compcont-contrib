@@ -2,7 +2,8 @@ package zap
 
 import (
 	"bytes"
-	"encoding/base64"
+	"encoding/json"
+	"fmt"
 	"io"
 	"unicode"
 
@@ -24,7 +25,7 @@ func bytes2String(data []byte) string {
 		return false
 	}
 	if isBinary(data) {
-		return base64.StdEncoding.EncodeToString(data)
+		return fmt.Sprintf("<BINARY: %d bytes>", len(data)) // 二进制内容，返回占位字符串
 	} else {
 		return string(data)
 	}
@@ -51,6 +52,15 @@ func newReadCloserRecorder(rdc io.ReadCloser, limit int) *readCloserRecorder {
 
 func (r *readCloserRecorder) LimitedBody() []byte {
 	return r.buffer.Bytes()
+}
+
+func (w *readCloserRecorder) LimitedBodyAsJSON() any {
+	var jsonData any
+	err := json.Unmarshal(w.LimitedBody(), &jsonData)
+	if err != nil {
+		return w.LimitedBody()
+	}
+	return jsonData
 }
 
 // Read 实现 io.Reader 接口
@@ -84,6 +94,15 @@ func newWriteCloserRecorder(rwr gin.ResponseWriter, limit int) *writeCloserRecor
 
 func (w *writeCloserRecorder) LimitedBody() []byte {
 	return w.buffer.Bytes()
+}
+
+func (w *writeCloserRecorder) LimitedBodyAsJSON() any {
+	var jsonData any
+	err := json.Unmarshal(w.LimitedBody(), &jsonData)
+	if err != nil {
+		return w.LimitedBody()
+	}
+	return jsonData
 }
 
 // Write 实现 io.Writer 接口
